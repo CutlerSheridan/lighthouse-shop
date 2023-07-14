@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8" />
+  <meta name='viewport' content="width=device-width" initial-scale='1' />
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class='navbar-container'>
+    <nav>
+      <a href='/'>Home</a>
+      <a href='/inventory/items'>All items</a>
+    </nav>
+  </div>
+  <div class='content-wrapper'>
+    <%- include(`${contentFile}`) %>
+  </div>
+</body>
+
+</html>
