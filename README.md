@@ -6,8 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- add populatedb script
-
 #### TODO LATER
 
 ##### Features
@@ -22,6 +20,11 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.0.2_
+
+- add percentDiscounted and getPrice() to ProductInstance objects
+- add populatedb script to fill in db
 
 _0.0.1_
 

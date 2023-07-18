@@ -1,11 +1,12 @@
 const { db } = require('../mongodb_config');
 
-const _productSchema = ({ _id, name, description, price }) => {
+const _productSchema = ({ _id, name, description, price, categories = [] }) => {
   return {
     _id,
     name,
     description,
     price,
+    categories,
   };
 };
 
