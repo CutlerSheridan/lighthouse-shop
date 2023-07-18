@@ -6,6 +6,9 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
+- add style for All Products page so it's a grid
+- code home page
+
 #### TODO LATER
 
 ##### Features
@@ -20,6 +23,10 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.1.0_
+
+- implement product_list
 
 _0.0.2_
 

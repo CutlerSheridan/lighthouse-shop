@@ -1,10 +1,21 @@
-const Product = require('../models/Product');
+const { Product } = require('../models/Product');
 const asyncHandler = require('express-async-handler');
 const { db, objectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
 
 exports.product_list = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product list');
+  const productDocs = await db
+    .collection('products')
+    .find({})
+    .sort({ name: 1 })
+    .toArray();
+  const products = Product(productDocs);
+
+  res.render('layout', {
+    contentFile: 'product_list',
+    title: 'All products',
+    products,
+  });
 });
 
 exports.product_detail = asyncHandler(async (req, res, next) => {

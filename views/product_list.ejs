@@ -1,0 +1,15 @@
+<h1><%= title %></h1>
+
+<div class='grid-wrapper'>
+  <ul>
+    <% products.forEach(prod => { %>
+    <li>
+      <div class='product-card'>
+        <h3><a href='<%= prod.getUrl() %>'><%= prod.name %></a></h3>
+        <p><%= prod.displayPrice() %></p>
+        <p><%= prod.description %></p>
+      </div>
+    </li>
+    <% }) %>
+  </ul>
+</div>
