@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
 
-const itemController = require('../controllers/itemController');
+const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
-const itemInstanceController = require('../controllers/itemInstanceController');
+const productInstanceController = require('../controllers/productInstanceController');
 
 /// HOME PAGE ///
 
@@ -18,16 +18,16 @@ router.get(
   })
 );
 
-/// ITEM ROUTES ///
+/// PRODUCT ROUTES ///
 
-router.get('/items', itemController.item_list);
-router.get('/item/create', itemController.item_create_get);
-router.post('/item/create', itemController.item_create_post);
-router.get('/item/:id/delete', itemController.item_delete_get);
-router.post('/item/:id/delete', itemController.item_delete_post);
-router.get('/item/:id/update', itemController.item_update_get);
-router.post('/item/:id/update', itemController.item_update_post);
-router.get('/item/:id', itemController.item_detail);
+router.get('/products', productController.product_list);
+router.get('/product/create', productController.product_create_get);
+router.post('/product/create', productController.product_create_post);
+router.get('/product/:id/delete', productController.product_delete_get);
+router.post('/product/:id/delete', productController.product_delete_post);
+router.get('/product/:id/update', productController.product_update_get);
+router.post('/product/:id/update', productController.product_update_post);
+router.get('/product/:id', productController.product_detail);
 
 /// CATEGORY ROUTES ///
 
@@ -40,33 +40,36 @@ router.get('/category/:id/update', categoryController.category_update_get);
 router.post('/category/:id/update', categoryController.category_update_post);
 router.get('/category/:id', categoryController.category_detail);
 
-/// ITEM INSTANCE ROUTES ///
+/// PRODUCT INSTANCE ROUTES ///
 
-router.get('/iteminstances', itemInstanceController.iteminstance_list);
+router.get('/productinstances', productInstanceController.productinstance_list);
 router.get(
-  '/iteminstance/create',
-  itemInstanceController.iteminstance_create_get
+  '/productinstance/create',
+  productInstanceController.productinstance_create_get
 );
 router.post(
-  '/iteminstance/create',
-  itemInstanceController.iteminstance_create_post
+  '/productinstance/create',
+  productInstanceController.productinstance_create_post
 );
 router.get(
-  '/iteminstance/:id/delete',
-  itemInstanceController.iteminstance_delete_get
+  '/productinstance/:id/delete',
+  productInstanceController.productinstance_delete_get
 );
 router.post(
-  '/iteminstance/:id/delete',
-  itemInstanceController.iteminstance_delete_post
+  '/productinstance/:id/delete',
+  productInstanceController.productinstance_delete_post
 );
 router.get(
-  '/iteminstance/:id/update',
-  itemInstanceController.iteminstance_update_get
+  '/productinstance/:id/update',
+  productInstanceController.productinstance_update_get
 );
 router.post(
-  '/iteminstance/:id/update',
-  itemInstanceController.iteminstance_update_post
+  '/productinstance/:id/update',
+  productInstanceController.productinstance_update_post
 );
-router.get('/iteminstance/:id', itemInstanceController.iteminstance_detail);
+router.get(
+  '/productinstance/:id',
+  productInstanceController.productinstance_detail
+);
 
 module.exports = router;
