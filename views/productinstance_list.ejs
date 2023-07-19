@@ -1,0 +1,12 @@
+<h1><%= title %></h1>
+<ul>
+  <% instances.forEach(instance => { %>
+  <li class='instances-li'>
+    <a href='<%= instance.getUrl() %>'><%= products.find(x => x._id.equals(instance.product)).name %></a><%= instance.percentDiscounted !== 0 ? ':' : '' %>
+    <% if (instance.percentDiscounted !== 0) { %>
+    <span class='instance-status-<%= instance.status.toLowerCase() %>'><%= instance.status %></span>
+    - <span class='instance-discount'><%= instance.percentDiscounted %>% off</span>
+    <% } %>
+  </li>
+  <% }) %>
+</ul>

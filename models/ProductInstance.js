@@ -17,6 +17,10 @@ const _instanceSchema = ({
 };
 
 const ProductInstance = (details) => {
+  if (details.length) {
+    return details.map((x) => ProductInstance(x));
+  }
+
   const newInstance = _instanceSchema(details);
 
   newInstance.getUrl = () => `/inventory/productinstance/${newInstance._id}`;

@@ -1,6 +1,6 @@
 const { Category } = require('../models/Category');
 const asyncHandler = require('express-async-handler');
-const { db, objectId } = require('../mongodb_config');
+const { db, ObjectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
 
 exports.category_list = asyncHandler(async (req, res, next) => {

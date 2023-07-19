@@ -33,3 +33,9 @@ nav > *:not(hr) {
 .content-wrapper {
   margin: 2rem;
 }
+.instance-status-used {
+  color: goldenrod;
+}
+.instance-discount {
+  font-style: italic;
+}

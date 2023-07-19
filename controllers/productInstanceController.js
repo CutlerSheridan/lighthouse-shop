@@ -1,10 +1,33 @@
-const ProductInstance = require('../models/ProductInstance');
+const { ProductInstance } = require('../models/ProductInstance');
 const asyncHandler = require('express-async-handler');
-const { db, objectId } = require('../mongodb_config');
+const { db, ObjectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
+const { Product } = require('../models/Product');
 
 exports.productinstance_list = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product Instance list');
+  const [instanceDocs, productDocs] = await Promise.all([
+    db
+      .collection('product_instances')
+      .find({})
+      .sort({ product: 1, status: 1 })
+      .toArray(),
+    db
+      .collection('products')
+      .find({}, { $projection: { name: 1 } })
+      .sort({ name: 1 })
+      .toArray(),
+  ]);
+  const [instances, products] = [
+    ProductInstance(instanceDocs),
+    Product(productDocs),
+  ];
+  res.render('layout', {
+    contentFile: 'productinstance_list',
+    title: 'All product instances',
+    instances,
+    products,
+    ObjectId,
+  });
 });
 
 exports.productinstance_detail = asyncHandler(async (req, res, next) => {
