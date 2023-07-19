@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement category_list
 - implement productinstance_list
 
 #### TODO LATER
@@ -17,12 +16,17 @@ See all products, view by category, view product instances. CRUD products, categ
 
 - add indices for:
   - product_instances.product - for Product.getStock()
+  - product_instances.status - for router.get('/')
 
 ##### Style
 
 - add credit
 
 #### DONE
+
+_0.1.3_
+
+- implement category_list
 
 _0.1.2_
 

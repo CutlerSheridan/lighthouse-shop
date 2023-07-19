@@ -1,10 +1,21 @@
-const Category = require('../models/Category');
+const { Category } = require('../models/Category');
 const asyncHandler = require('express-async-handler');
 const { db, objectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
 
 exports.category_list = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category list');
+  const categoryDocs = await db
+    .collection('categories')
+    .find({})
+    .sort({ name: 1 })
+    .toArray();
+  const categories = Category(categoryDocs);
+
+  res.render('layout', {
+    contentFile: 'category_list',
+    title: 'All categories',
+    categories,
+  });
 });
 
 exports.category_detail = asyncHandler(async (req, res, next) => {

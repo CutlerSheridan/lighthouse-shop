@@ -1,0 +1,11 @@
+<h1><%= title %></h1>
+<% if (locals.categories) { %>
+<% categories.forEach(cat => { %>
+<div class='categories-categoryGroup'>
+  <h2><a href='<%= cat.getUrl() %>'><%= cat.name %></a></h2>
+  <p><%= cat.description %></p>
+</div>
+<% }) %>
+<% } else { %>
+<p>No categories to display.</p>
+<% } %>
