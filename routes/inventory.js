@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-
+const { db } = require('../mongodb_config');
+const { STATUSES } = require('../models/ProductInstance');
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
 const productInstanceController = require('../controllers/productInstanceController');
@@ -11,9 +12,45 @@ const productInstanceController = require('../controllers/productInstanceControl
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
+    const [numOfProducts, numOfCategories, instanceGroup] = await Promise.all([
+      db.collection('products').countDocuments({}),
+      db.collection('categories').countDocuments({}),
+      db
+        .collection('product_instances')
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              total_count: { $sum: 1 },
+              not_new_count: {
+                $sum: {
+                  $switch: {
+                    branches: [
+                      {
+                        case: { $ne: ['$status', STATUSES[0]] },
+                        then: 1,
+                      },
+                    ],
+                    default: 0,
+                  },
+                },
+              },
+            },
+          },
+        ])
+        .next(),
+    ]);
+
+    console.log(instanceGroup);
+
     res.render('layout', {
       contentFile: 'index',
+      stylesheet: 'index',
       title: 'Lighthouse Shop',
+      numOfProducts,
+      numOfCategories,
+      numOfInstances: instanceGroup.total_count,
+      numOfUsed: instanceGroup.not_new_count,
     });
   })
 );

@@ -1,0 +1,7 @@
+.home-collectionList {
+  margin: 1rem 0;
+  list-style: inside;
+}
+.home-collectionName {
+  font-weight: bold;
+}

@@ -17,7 +17,7 @@ body {
   font-size: 2rem;
 }
 h1 {
-  margin: 2rem;
+  margin-bottom: 2rem;
   font-size: 3rem;
 }
 nav {
@@ -29,4 +29,7 @@ nav {
 }
 nav > *:not(hr) {
   width: max-content;
+}
+.content-wrapper {
+  margin: 2rem;
 }

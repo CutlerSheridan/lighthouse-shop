@@ -1,5 +1,4 @@
 .productList-gridWrapper {
-  margin: 2rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));

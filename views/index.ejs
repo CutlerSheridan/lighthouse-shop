@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-
 <body>
   <h1><%= title %></h1>
-  <p>Welcome to the <%= title %></p>
-</body>
+  <p>Welcome to the <%= title %>.</p>
+  <p>This is a no-frills store to keep you stocked during those long months at sea.</p>
+  <ul class='home-collectionList'>
+    <li><span class="home-collectionName">Products:</span> <%= numOfProducts %></li>
+    <li><span class="home-collectionName">Categories:</span> <%= numOfCategories %></li>
+    <li><span class="home-collectionName">In-stock items:</span> <%= numOfInstances %></li>
+    <li><span class='home-collectionName'>Used items available:</span> <%= numOfUsed %></li>
+  </ul>
 
-</html>
+</body>

@@ -6,7 +6,8 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- code home page
+- implement category_list
+- implement productinstance_list
 
 #### TODO LATER
 
@@ -22,6 +23,10 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.1.2_
+
+- code home page with doc counts displayed
 
 _0.1.1_
 
