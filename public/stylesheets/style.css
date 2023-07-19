@@ -1,8 +1,32 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+:root {
+  font-size: 62.5%;
 }
-
-a {
-  color: #00B7FF;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: inherit;
+  font-family: inherit;
+}
+body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  font-size: 2rem;
+}
+h1 {
+  margin: 2rem;
+  font-size: 3rem;
+}
+nav {
+  margin: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+}
+nav > *:not(hr) {
+  width: max-content;
 }

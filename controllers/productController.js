@@ -1,20 +1,25 @@
 const { Product } = require('../models/Product');
 const asyncHandler = require('express-async-handler');
-const { db, objectId } = require('../mongodb_config');
+const { db, ObjectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
 
 exports.product_list = asyncHandler(async (req, res, next) => {
-  const productDocs = await db
-    .collection('products')
-    .find({})
-    .sort({ name: 1 })
-    .toArray();
+  const [productDocs, instanceDocs] = await Promise.all([
+    db.collection('products').find({}).sort({ name: 1 }).toArray(),
+    db
+      .collection('product_instances')
+      .find({}, { $projection: { _id: 1 } })
+      .toArray(),
+  ]);
   const products = Product(productDocs);
 
   res.render('layout', {
     contentFile: 'product_list',
+    stylesheet: 'product_list_style',
     title: 'All products',
     products,
+    instances: instanceDocs,
+    ObjectId,
   });
 });
 

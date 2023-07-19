@@ -6,21 +6,22 @@
   <meta charset="utf-8" />
   <meta name='viewport' content="width=device-width" initial-scale='1' />
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <% if (locals.stylesheet) { %>
+  <link rel='stylesheet' href='/stylesheets/<%= stylesheet %>.css'>
+  <% } %>
 </head>
 
 <body>
-  <div class='navbar-container'>
-    <nav>
-      <a href='/'>Home</a>
-      <a href='/inventory/products'>All products</a>
-      <a href='/inventory/categories'>All categories</a>
-      <a href='/inventory/instances'>All instances</a>
-      <hr>
-      <a href='/inventory/product/create'>Add new product</a>
-      <a href='/inventory/category/create'>Add new category</a>
-      <a href='/inventory/productinstance/create'>Add new product instance</a>
-    </nav>
-  </div>
+  <nav>
+    <a href='/'>Home</a>
+    <a href='/inventory/products'>All products</a>
+    <a href='/inventory/categories'>All categories</a>
+    <a href='/inventory/instances'>All instances</a>
+    <hr>
+    <a href='/inventory/product/create'>Add new product</a>
+    <a href='/inventory/category/create'>Add new category</a>
+    <a href='/inventory/productinstance/create'>Add to stock</a>
+  </nav>
   <div class='content-wrapper'>
     <%- include(`${contentFile}`) %>
   </div>
