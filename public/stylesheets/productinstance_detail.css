@@ -1,0 +1,17 @@
+.instance-detailLabel {
+  font-weight: bold;
+}
+.instanceDetail-detailContainer {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.instanceDetail-detailContainer > * {
+  display: block;
+}
+.instanceDetail-percentDiscounted {
+  font-style: italic;
+  font-size: 0.75em;
+  color: red;
+}

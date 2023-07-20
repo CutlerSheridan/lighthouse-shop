@@ -6,7 +6,9 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement productinstance_detail
+- implement product_create
+- implement productinstance_create
+- implement category_create
 
 #### TODO LATER
 
@@ -28,6 +30,11 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.2.2_
+
+- implement productinstance_detail
+- style productinstance_detail a little for legibility
 
 _0.2.1_
 

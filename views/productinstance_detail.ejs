@@ -1,0 +1,22 @@
+<h1>ID: <%= instance._id %></h1>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Product:</span>
+  <a href='<%= product.getUrl() %>'><%= product.name %></a>
+</p>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Status:</span>
+  <span class='instance-status-<%= instance.status.toLowerCase() %>'><%= instance.status %></span>
+</p>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Price:</span>
+  <span class='instanceDetail-price'> <%= instance.getPriceFromArgument(product.price) %></span>
+  <% if(instance.status !== statuses[0]) { %>
+  <span class='instanceDetail-percentDiscounted'>(<%= instance.percentDiscounted %>% off)</span>
+  <% } %>
+</p>
+<% if(instance.status !== statuses[0]) { %>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Condition:</span>
+  <%= instance.condition %>
+</p>
+<% } %>
