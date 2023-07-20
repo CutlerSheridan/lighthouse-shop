@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement category_detail
 - implement productinstance_detail
 
 #### TODO LATER
@@ -20,14 +19,21 @@ See all products, view by category, view product instances. CRUD products, categ
 - make instances list alphabetical
 - make "in-stock" vs. "in stock" consistent
 - add indices for:
-  - product_instances.product - for Product.getStock()
+  - product_instances.product - for Product.getStock(), product_detail, category_detail
   - product_instances.status - for router.get('/')
+  - products.categories - for category_detail
 
 ##### Style
 
 - add credit
 
 #### DONE
+
+_0.2.1_
+
+- implement category_detail
+- refactor stylesheet template logic to accept multiple stylesheets
+- extract product grid into its own css file for multipurpose use
 
 _0.2.0_
 

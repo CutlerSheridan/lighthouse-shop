@@ -1,4 +1,5 @@
 const { Category } = require('../models/Category');
+const { Product } = require('../models/Product');
 const asyncHandler = require('express-async-handler');
 const { db, ObjectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
@@ -19,7 +20,32 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: Category detail for ID ${req.params.id}`);
+  const id = new ObjectId(req.params.id);
+  const [categoryDoc, productDocs] = await Promise.all([
+    db.collection('categories').findOne({ _id: id }),
+    db
+      .collection('products')
+      .find({ categories: id })
+      .sort({ name: 1 })
+      .toArray(),
+  ]);
+  const [category, products] = [Category(categoryDoc), Product(productDocs)];
+  const instances = await db
+    .collection('product_instances')
+    .find(
+      { product: { $in: products.map((prod) => prod._id) } },
+      { $projection: { product: 1 } }
+    )
+    .toArray();
+
+  res.render('layout', {
+    contentFile: 'category_detail',
+    stylesheets: ['product_grid'],
+    title: category.name,
+    category,
+    products,
+    instances,
+  });
 });
 
 exports.category_create_get = asyncHandler(async (req, res, next) => {

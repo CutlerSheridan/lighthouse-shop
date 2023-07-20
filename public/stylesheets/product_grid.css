@@ -1,0 +1,21 @@
+.productGrid-wrapper {
+  margin: 2rem 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+.productGrid-card {
+  padding: 1rem;
+  border: 1px solid black;
+}
+.productCard-price {
+  font-size: 0.85em;
+}
+.productCard-stock {
+  font-style: italic;
+  font-size: 0.75em;
+}
+.productCard-description {
+  margin-top: 0.5rem;
+  font-size: 0.85em;
+}

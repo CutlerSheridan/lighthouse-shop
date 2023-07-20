@@ -17,7 +17,7 @@ body {
   font-size: 2rem;
 }
 h1 {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 3rem;
 }
 nav {
@@ -31,7 +31,9 @@ nav > *:not(hr) {
   width: max-content;
 }
 .content-wrapper {
-  margin: 2rem;
+  margin: 0 2rem;
+  width: 100%;
+  max-width: 80rem;
 }
 .instance-status-new {
   color: forestgreen;

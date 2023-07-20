@@ -1,8 +1,8 @@
 <h1><%= title %></h1>
 
-<div class='productList-gridWrapper'>
+<div class='productGrid-wrapper'>
   <% products.forEach(prod => { %>
-  <div class='productList-card'>
+  <div class='productGrid-card'>
     <h3 class='productCard-name'><a href='<%= prod.getUrl() %>'><%= prod.name %></a></h3>
     <p class='productCard-price'><%= prod.displayPrice() %></p>
     <p class='productCard-stock'>In stock: <%= instances.reduce((acc, cur) => (cur.product.equals(prod._id) ? ++acc : acc), 0) %></p>
