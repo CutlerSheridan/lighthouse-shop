@@ -1,4 +1,6 @@
 const { Product } = require('../models/Product');
+const { ProductInstance, STATUSES } = require('../models/ProductInstance');
+const { Category } = require('../models/Category');
 const asyncHandler = require('express-async-handler');
 const { db, ObjectId } = require('../mongodb_config');
 const { body, validationResult } = require('express-validator');
@@ -24,7 +26,35 @@ exports.product_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.product_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: Product detail for ID ${req.params.id}`);
+  const id = new ObjectId(req.params.id);
+  const [productDoc, instanceDocs] = await Promise.all([
+    db.collection('products').findOne({ _id: id }),
+    db
+      .collection('product_instances')
+      .find({ product: id })
+      .sort({ status: 1 })
+      .toArray(),
+  ]);
+  const [product, instances] = [
+    Product(productDoc),
+    ProductInstance(instanceDocs),
+  ];
+  const categoryDocs = await db
+    .collection('categories')
+    .find({ _id: { $in: product.categories } })
+    .sort({ name: 1 })
+    .toArray();
+  const categories = Category(categoryDocs);
+
+  res.render('layout', {
+    contentFile: 'product_detail',
+    stylesheet: 'product_detail',
+    title: product.name,
+    product,
+    instances,
+    statuses: STATUSES,
+    categories,
+  });
 });
 
 exports.product_create_get = asyncHandler(async (req, res, next) => {

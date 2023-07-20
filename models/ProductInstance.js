@@ -24,13 +24,18 @@ const ProductInstance = (details) => {
   const newInstance = _instanceSchema(details);
 
   newInstance.getUrl = () => `/inventory/productinstance/${newInstance._id}`;
-  newInstance.getPrice = async () => {
+  newInstance.getPriceFromDb = async () => {
     const originalPrice = await db
       .collection('products')
       .findOne({ _id: newInstance._id }, { $projection: { price: 1, _id: 0 } });
     const newPrice =
       (originalPrice * 100 * (100 - newInstance.percentDiscounted)) / 10000;
-    return newPrice.toFixed(2);
+    return '$' + newPrice.toFixed(2);
+  };
+  newInstance.getPriceFromArgument = (originalPrice) => {
+    const newPrice =
+      (originalPrice * 100 * (100 - newInstance.percentDiscounted)) / 10000;
+    return '$' + newPrice.toFixed(2);
   };
 
   return newInstance;

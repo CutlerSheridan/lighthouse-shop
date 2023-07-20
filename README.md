@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement product_detail
 - implement category_detail
 - implement productinstance_detail
 
@@ -14,8 +13,12 @@ See all products, view by category, view product instances. CRUD products, categ
 
 ##### Features
 
+- add product images
+
 ##### Behavior
 
+- make instances list alphabetical
+- make "in-stock" vs. "in stock" consistent
 - add indices for:
   - product_instances.product - for Product.getStock()
   - product_instances.status - for router.get('/')
@@ -25,6 +28,12 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.2.0_
+
+- implement product_detail
+- add getPriceFromArgument() method to ProductInstance objects as sync alternative to async getPriceFromDb()
+- style product_detail a little for legibility
 
 _0.1.4_
 

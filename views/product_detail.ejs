@@ -1,0 +1,29 @@
+<h1 class='product-header'><%= product.name %></h1>
+<p class="product-price"><%= product.displayPrice() %></p>
+<p class="product-stock"><span class="product-detailLabel">In-stock:</span> <%= instances.length %></p>
+<p class="product-description"><%= product.description %></p>
+<div class='product-categories'><span class="product-detailLabel">Categories:</span>
+  <% categories.forEach((cat, index) => { %>
+  <a href='<%= cat.getUrl() %>'><%= cat.name %></a><%= index < categories.length - 1 ? ',' : '' %>
+  <% }) %>
+</div>
+<br>
+<div class="product-instancesContainer">
+  <h2 class='product-instancesHeader'>In-stock</h2>
+  <hr>
+  <% if (instances.length) { %>
+  <% instances.forEach((inst, index) => { %>
+  <div class="product-instanceCard">
+    <p><span class="product-detailLabel">Status:</span> <span class='instance-status-<%= inst.status.toLowerCase() %>'><%= inst.status %></span></p>
+    <% if(inst.status !== statuses[0]) { %>
+    <p><span class="product-detailLabel">Discounted price:</span> <%= inst.getPriceFromArgument(product.price) %> <span class='product-instanceDiscountPercent'>(<%= inst.percentDiscounted %>% off)</span></p>
+    <p><span class="product-detailLabel">Condition:</span> <%= inst.condition %></p>
+    <% } %>
+    <p><span class="product-detailLabel">ID:</span> <a href='<%= inst.getUrl() %>'><%= inst._id %></a></p>
+  </div>
+  <hr>
+  <% }) %>
+  <% } else { %>
+  <div>This item is not currently in stock.</div>
+  <% } %>
+</div>
