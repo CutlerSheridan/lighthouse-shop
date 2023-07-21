@@ -30,6 +30,10 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### DONE
 
+_0.3.1_
+
+- add stylesheet for forms with basic styling for legibility
+
 _0.3.0_
 
 - implement product_create_get

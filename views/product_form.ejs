@@ -26,7 +26,7 @@
 </form>
 
 <% if(locals.errors) { %>
-<ul>
+<ul class='form-errorWrapper'>
   <% errors.forEach(err =>  { %>
   <li class='form-error'><%= err.msg %></li>
   <% }) %>

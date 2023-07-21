@@ -66,6 +66,7 @@ exports.product_create_get = asyncHandler(async (req, res, next) => {
   const categories = Category(categoryDocs);
   res.render('layout', {
     contentFile: 'product_form',
+    stylesheets: ['form'],
     title: 'Add Product',
     categories,
   });
@@ -119,6 +120,7 @@ exports.product_create_post = [
       });
       res.render('layout', {
         contentFile: 'product_form',
+        stylesheets: ['form'],
         title: 'Add Product',
         categories,
         product,

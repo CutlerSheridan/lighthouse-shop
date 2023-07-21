@@ -1,0 +1,17 @@
+.form-group {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.form-group > label:first-of-type {
+  font-weight: bold;
+}
+.form-errorWrapper {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  list-style: inside;
+}
+.form-error {
+  color: red;
+}
