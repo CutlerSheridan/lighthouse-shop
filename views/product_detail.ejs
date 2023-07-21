@@ -1,6 +1,6 @@
 <h1 class='product-header'><%= product.name %></h1>
 <p class="product-price"><%= product.displayPrice() %></p>
-<p class="product-stock"><span class="product-detailLabel">In-stock:</span> <%= instances.length %></p>
+<p class="product-stock"><span class="product-detailLabel">In-stock:</span> <%= instances.length ? instances.length : 0 %></p>
 <p class="product-description"><%= product.description %></p>
 <div class='product-categories'><span class="product-detailLabel">Categories:</span>
   <% categories.forEach((cat, index) => { %>

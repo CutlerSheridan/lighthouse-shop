@@ -1,0 +1,34 @@
+<h1><%= title %></h1>
+<form method='POST' action=''>
+  <div class="form-group">
+    <label for="product-name">Product name:</label>
+    <input class='form-control' id='product-name' name='name' value='<%= locals.product ? product.name : "" %>'>
+  </div>
+  <div class="form-group">
+    <label for="product-price">Price:</label>
+    <input class='form-control' id='product-price' name='price' value='<%= locals.product && typeof product.price === 'number' && product.price >= .01 ? product.price : "" %>'>
+  </div>
+  <div class="form-group">
+    <label for="product-description">Description:</label>
+    <input type='textarea' class='form-control' id='product-description' name='description' value='<%= locals.product ? product.description : "" %>'>
+  </div>
+  <div class="form-group">
+    <label>Categories:</label>
+    <% categories.forEach(cat => { %>
+    <div>
+      <input type='checkbox' class='checkbox-input' id='<%= cat._id %>' name='categories' value='<%= cat._id %>' <%= cat.checked %>>
+      <label for='<%= cat._id %>'><%= cat.name %></label>
+    </div>
+    <% }) %>
+  </div>
+
+  <button type='submit'>Submit</button>
+</form>
+
+<% if(locals.errors) { %>
+<ul>
+  <% errors.forEach(err =>  { %>
+  <li class='form-error'><%= err.msg %></li>
+  <% }) %>
+</ul>
+<% } %>

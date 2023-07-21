@@ -58,11 +58,78 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.product_create_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product create GET');
+  const categoryDocs = await db
+    .collection('categories')
+    .find({})
+    .sort({ name: 1 })
+    .toArray();
+  const categories = Category(categoryDocs);
+  res.render('layout', {
+    contentFile: 'product_form',
+    title: 'Add Product',
+    categories,
+  });
 });
-exports.product_create_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product create POST');
-});
+exports.product_create_post = [
+  (req, res, next) => {
+    if (!(req.body.categories instanceof Array)) {
+      if (!req.body.categories) {
+        req.body.categories = [];
+      } else {
+        req.body.categories = [req.body.categories];
+      }
+    }
+    next();
+  },
+  body('name', 'Product name is required').trim().notEmpty().escape(),
+  body('price')
+    .trim()
+    .notEmpty()
+    .escape()
+    .withMessage('Price is required')
+    .customSanitizer((value) =>
+      typeof +value === 'number' ? +value : undefined
+    )
+    .isFloat()
+    .withMessage('Price must be number')
+    .customSanitizer((value) =>
+      typeof +value === 'number' ? +(+value).toFixed(2) : undefined
+    )
+    .isFloat({ min: 0.01 })
+    .withMessage('Price must be at least .01¢'),
+  body('description', 'Description is required').trim().notEmpty().escape(),
+  body('categories.*').trim().escape(),
+  body('categories', 'At least one category is required')
+    .isArray({ min: 1 })
+    .customSanitizer((value) => value.map((x) => new ObjectId(x))),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const product = Product(req.body);
+    if (!errors.isEmpty()) {
+      const categoryDocs = await db
+        .collection('categories')
+        .find({})
+        .sort({ name: 1 })
+        .toArray();
+      const categories = Category(categoryDocs);
+      categories.forEach((cat) => {
+        if (product.categories.find((x) => x.equals(cat._id))) {
+          cat.checked = 'checked';
+        }
+      });
+      res.render('layout', {
+        contentFile: 'product_form',
+        title: 'Add Product',
+        categories,
+        product,
+        errors: errors.array(),
+      });
+    } else {
+      await db.collection('products').insertOne(product);
+      res.redirect(product.getUrl());
+    }
+  }),
+];
 
 exports.product_delete_get = asyncHandler(async (req, res, next) => {
   res.send('NOT IMPLEMENTED: Product delete GET');
