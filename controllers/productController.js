@@ -88,16 +88,16 @@ exports.product_create_post = [
     .notEmpty()
     .escape()
     .withMessage('Price is required')
-    .customSanitizer((value) =>
-      typeof +value === 'number' ? +value : undefined
-    )
+    .bail()
     .isFloat()
     .withMessage('Price must be number')
-    .customSanitizer((value) =>
-      typeof +value === 'number' ? +(+value).toFixed(2) : undefined
-    )
+    .bail()
+    .customSanitizer((value) => (+value).toFixed(2))
     .isFloat({ min: 0.01 })
-    .withMessage('Price must be at least .01¢'),
+    .withMessage('Price must be at least .01¢')
+    .toFloat()
+    .if(body('price').not().isFloat({ min: 0.01 }))
+    .customSanitizer((value) => ''),
   body('description', 'Description is required').trim().notEmpty().escape(),
   body('categories.*').trim().escape(),
   body('categories', 'At least one category is required')

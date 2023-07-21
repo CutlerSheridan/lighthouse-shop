@@ -15,3 +15,7 @@
 .form-error {
   color: red;
 }
+.form-percentInput {
+  width: 3ch;
+  text-align: right;
+}

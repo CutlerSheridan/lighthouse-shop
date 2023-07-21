@@ -52,11 +52,88 @@ exports.productinstance_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.productinstance_create_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product Instance create GET');
+  const productDocs = await db
+    .collection('products')
+    .find({})
+    .sort({ name: 1 })
+    .toArray();
+  const products = Product(productDocs);
+  res.render('layout', {
+    contentFile: 'productinstance_form',
+    stylesheets: ['form'],
+    title: 'Add item to stock',
+    products,
+    statuses: STATUSES,
+  });
 });
-exports.productinstance_create_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product Instance create POST');
-});
+exports.productinstance_create_post = [
+  body('product', 'Must select a product')
+    .trim()
+    .notEmpty()
+    .isMongoId()
+    .escape()
+    .bail()
+    .customSanitizer((value) => new ObjectId(value)),
+  body('status', 'Select status').trim().notEmpty().isIn(STATUSES).escape(),
+  body('condition', 'Condition required if not new')
+    .trim()
+    .if((value, { req }) => req.body.status !== STATUSES[0])
+    .notEmpty()
+    .escape(),
+  body('condition', 'Condition emptied')
+    .if((value, { req }) => req.body.status === STATUSES[0])
+    .customSanitizer((value) => ''),
+  body('discount')
+    .trim()
+    .if((value, { req }) => req.body.status !== STATUSES[0])
+    .notEmpty()
+    .withMessage('Discount required if not new')
+    .escape()
+    .bail()
+    .isFloat()
+    .withMessage('Discount must be a number')
+    .bail()
+    .isFloat({ min: 0.5, max: 99.4 })
+    .withMessage('Discount must be between 1% and 99%')
+    .customSanitizer((value) => Math.round(+value))
+    .toInt(),
+  body('discount')
+    .if((value, { req }) => req.body.status === STATUSES[0])
+    .customSanitizer((value) => ''),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const instance = ProductInstance({
+      ...req.body,
+      percentDiscounted: req.body.discount,
+    });
+    if (!errors.isEmpty()) {
+      const productDocs = await db
+        .collection('products')
+        .find({})
+        .sort({ name: 1 })
+        .toArray();
+      const products = Product(productDocs);
+      products.forEach((prod) => {
+        if (prod._id.equals(instance.product)) {
+          prod.selected = 'selected';
+        }
+      });
+      console.log(errors.array());
+      res.render('layout', {
+        contentFile: 'productinstance_form',
+        stylesheets: ['form'],
+        title: 'Add item to stock',
+        products,
+        statuses: STATUSES,
+        instance,
+        errors: errors.array(),
+      });
+    } else {
+      await db.collection('product_instances').insertOne(instance);
+      res.redirect(instance.getUrl());
+    }
+  }),
+];
 
 exports.productinstance_delete_get = asyncHandler(async (req, res, next) => {
   res.send('NOT IMPLEMENTED: Product Instance delete GET');

@@ -11,6 +11,7 @@
   <span class="instance-detailLabel">Price:</span>
   <span class='instanceDetail-price'> <%= instance.getPriceFromArgument(product.price) %></span>
   <% if(instance.status !== statuses[0]) { %>
+  <span class='instanceDetail-originalPrice'><%=product.displayPrice()%></span>
   <span class='instanceDetail-percentDiscounted'>(<%= instance.percentDiscounted %>% off)</span>
   <% } %>
 </p>

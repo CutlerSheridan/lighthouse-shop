@@ -1,0 +1,42 @@
+<h1><%= title %></h1>
+
+<form method='POST' action=''>
+  <div class="form-group">
+    <label for="instance-product">Product:</label>
+    <select class='form-control' id='instance-product' name='product'>
+      <option>Choose an item</option>
+      <option>---------------------</option>
+      <% products.forEach(prod => { %>
+      <option value='<%= prod._id %>' <%= prod.selected %>><%= prod.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="instance-status">Status:</label>
+    <select class='form-control' id='instance-status' name='status'>
+      <% statuses.forEach(status => { %>
+      <option value='<%= status %>' <%= locals.instance && instance.status === status ? 'selected' : '' %>><%= status %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="instance-condition">Condition (if not new):</label>
+    <input type='textarea' class='form-control' id='instance-condition' name='condition' value='<%= locals.instance ? instance.condition : "" %>'>
+  </div>
+  <div class="form-group">
+    <label for="instance-discount">Percent discounted:</label>
+    <div class="form-percentGroup">
+      <input class='form-control form-percentInput' id='instance-discount' name='discount' value='<%= locals.instance && instance.percentDiscounted !== 0 ? instance.percentDiscounted : "" %>' placeholder='00'> %
+    </div>
+  </div>
+
+  <button type='submit'>Submit</button>
+</form>
+
+<% if(locals.errors) { %>
+<ul class='form-errorWrapper'>
+  <% errors.forEach(err =>  { %>
+  <li class='form-error'><%= err.msg %></li>
+  <% }) %>
+</ul>
+<% } %>

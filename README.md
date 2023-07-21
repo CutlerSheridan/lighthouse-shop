@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement productinstance_create
 - implement category_create
 
 #### TODO LATER
@@ -29,6 +28,14 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.3.2_
+
+- implement productinstance_create_get
+- write productinstance_form.ejs
+- improve validation chain for product_create_post
+- implement productinstance_create_post
+- add original price to productinstance_detail
 
 _0.3.1_
 
