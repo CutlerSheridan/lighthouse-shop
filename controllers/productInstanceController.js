@@ -118,7 +118,7 @@ exports.productinstance_create_post = [
           prod.selected = 'selected';
         }
       });
-      console.log(errors.array());
+
       res.render('layout', {
         contentFile: 'productinstance_form',
         stylesheets: ['form'],

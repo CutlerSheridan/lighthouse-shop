@@ -11,7 +11,7 @@ const _productSchema = ({ _id, name, description, price, categories = [] }) => {
 };
 
 const Product = (details) => {
-  if (details.length) {
+  if (Array.isArray(details)) {
     return details.map((x) => Product(x));
   }
 

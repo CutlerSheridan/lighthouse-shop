@@ -17,7 +17,7 @@ const _instanceSchema = ({
 };
 
 const ProductInstance = (details) => {
-  if (details.length) {
+  if (Array.isArray(details)) {
     return details.map((x) => ProductInstance(x));
   }
 

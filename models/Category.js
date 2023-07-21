@@ -7,7 +7,7 @@ const _categorySchema = ({ _id, name, description }) => {
 };
 
 const Category = (details) => {
-  if (details.length) {
+  if (Array.isArray(details)) {
     return details.map((x) => Category(x));
   }
 

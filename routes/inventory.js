@@ -41,11 +41,9 @@ router.get(
         .next(),
     ]);
 
-    console.log(instanceGroup);
-
     res.render('layout', {
       contentFile: 'index',
-      stylesheet: 'index',
+      stylesheets: ['index'],
       title: 'Lighthouse Shop',
       numOfProducts,
       numOfCategories,

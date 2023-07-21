@@ -2,6 +2,9 @@
 <p><%= category.description %></p>
 
 <div class='productGrid-wrapper'>
+  <% if(!products.length) { %>
+  <p>There are currently no items listed in this category.</p>
+  <% } else { %>
   <% products.forEach(prod => { %>
   <div class='productGrid-card'>
     <h3 class='productCard-name'><a href='<%= prod.getUrl() %>'><%= prod.name %></a></h3>
@@ -10,4 +13,5 @@
     <p class='productCard-description'><%= prod.description %></p>
   </div>
   <% }) %>
+  <% } %>
 </div>

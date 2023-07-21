@@ -49,11 +49,32 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_create_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category create GET');
+  res.render('layout', {
+    contentFile: 'category_form',
+    stylesheets: ['form'],
+    title: 'Add category',
+  });
 });
-exports.category_create_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category create POST');
-});
+exports.category_create_post = [
+  body('name', 'Category name required').trim().notEmpty().escape(),
+  body('description', 'Description required').trim().notEmpty().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const category = Category(req.body);
+    if (!errors.isEmpty()) {
+      res.render('layout', {
+        contentFile: 'category_form',
+        stylesheets: ['form'],
+        title: 'Add category',
+        category,
+        errors: errors.array(),
+      });
+    } else {
+      await db.collection('categories').insertOne(category);
+      res.redirect(category.getUrl());
+    }
+  }),
+];
 
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
   res.send('NOT IMPLEMENTED: Category delete GET');

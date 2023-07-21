@@ -6,7 +6,10 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement category_create
+- add Update and Delete links to each detail page
+- implement product_delete
+- implement productinstance_delete
+- implement category_delete
 
 #### TODO LATER
 
@@ -28,6 +31,13 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.3.3_
+
+- implement category_create_get
+- implement category_create_post
+- write category_form.ejs
+- refactor constructors to use Array.isArray(details) instead of details.length so empty arrays return empty arrays instead of empty objects
 
 _0.3.2_
 
