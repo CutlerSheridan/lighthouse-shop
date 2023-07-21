@@ -44,3 +44,11 @@ nav > *:not(hr) {
 .instance-discount {
   font-style: italic;
 }
+.deleteButton {
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+.deleteButton:hover {
+  background: rgb(184, 16, 49);
+}

@@ -1,0 +1,17 @@
+<h1><%= title %></h1>
+
+<p class="product-price"><%= product.displayPrice() %></p>
+<p class="product-description"><%= product.description %></p>
+
+<% if (instanceExists) { %>
+<br>
+<p>Please delete all instances of this product from the stock before deleting.</p>
+<% } else { %>
+<form method='POST' action=''>
+  <input type='hidden' name='product_id' value='<%= product._id %>' required>
+  <button class='deleteButton'>Delete</button>
+</form>
+<% } %>
+
+<br>
+<p><a href='<%= product.getUrl() %>'>Go back</a></p>

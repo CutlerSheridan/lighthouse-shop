@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement product_delete
 - implement productinstance_delete
 - implement category_delete
 
@@ -30,6 +29,10 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.4.0_
+
+- implement product_delete
 
 _0.3.4_
 

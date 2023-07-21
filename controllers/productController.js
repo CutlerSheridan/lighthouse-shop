@@ -134,10 +134,39 @@ exports.product_create_post = [
 ];
 
 exports.product_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product delete GET');
+  const id = new ObjectId(req.params.id);
+  const [productDoc, instanceExists] = await Promise.all([
+    db.collection('products').findOne({ _id: id }),
+    db.collection('product_instances').findOne({ product: id }),
+  ]);
+  const product = Product(productDoc);
+  res.render('layout', {
+    contentFile: 'product_delete',
+    stylesheets: ['product_detail'],
+    title: `Delete ${product.name}?`,
+    product,
+    instanceExists,
+  });
 });
 exports.product_delete_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product delete POST');
+  const id = new ObjectId(req.body.product_id);
+  const [productDoc, instanceExists] = await Promise.all([
+    db.collection('products').findOne({ _id: id }),
+    db.collection('product_instances').findOne({ product: id }),
+  ]);
+  const product = Product(productDoc);
+  if (instanceExists) {
+    res.render('layout', {
+      contentFile: 'product_delete',
+      stylesheets: ['product_detail'],
+      title: `Delete ${product.name}?`,
+      product,
+      instanceExists,
+    });
+  } else {
+    await db.collection('products').deleteOne({ _id: id });
+    res.redirect('/inventory/products');
+  }
 });
 
 exports.product_update_get = asyncHandler(async (req, res, next) => {
