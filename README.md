@@ -28,6 +28,10 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### DONE
 
+_1.0.0_
+
+- add production dependencies
+
 _0.5.2_
 
 - implement category_update_get

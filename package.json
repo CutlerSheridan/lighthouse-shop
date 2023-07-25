@@ -1,20 +1,26 @@
 {
   "name": "lighthouse-shop",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=lighthouse-shop:* && npm run devstart"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.6",
     "debug": "~4.3.4",
     "dotenv": "^16.3.1",
     "ejs": "~3.1.9",
     "express": "~4.18.2",
     "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^6.8.0",
     "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
     "http-errors": "~2.0.0",
     "mongodb": "^5.7.0",
     "morgan": "~1.10.0"

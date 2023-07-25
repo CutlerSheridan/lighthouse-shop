@@ -3,12 +3,22 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventory');
 
 const app = express();
+
+app.use(compression());
+app.use(helmet());
+const limiter = require('express-rate-limit')({
+  windowMs: 1 * 60 * 1000,
+  max: 60,
+});
+app.use(limiter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
