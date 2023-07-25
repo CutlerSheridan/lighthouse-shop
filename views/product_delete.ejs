@@ -5,7 +5,7 @@
 
 <% if (instanceExists) { %>
 <br>
-<p>Please delete all instances of this product from the stock before deleting.</p>
+<p class='product-deleteInstructions'>Please delete all instances of this product from the stock before deleting.</p>
 <% } else { %>
 <form method='POST' action=''>
   <input type='hidden' name='product_id' value='<%= product._id %>' required>

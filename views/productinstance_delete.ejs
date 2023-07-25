@@ -1,0 +1,31 @@
+<h1>Delete instance <%= instance._id %>?</h1>
+
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Product:</span>
+  <a href='<%= product.getUrl() %>'><%= product.name %></a>
+</p>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Status:</span>
+  <span class='instance-status-<%= instance.status.toLowerCase() %>'><%= instance.status %></span>
+</p>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Price:</span>
+  <span class='instanceDetail-price'> <%= instance.getPriceFromArgument(product.price) %></span>
+  <% if(instance.status !== statuses[0]) { %>
+  <span class='instanceDetail-originalPrice'><%=product.displayPrice()%></span>
+  <span class='instanceDetail-percentDiscounted'>(<%= instance.percentDiscounted %>% off)</span>
+  <% } %>
+</p>
+<% if(instance.status !== statuses[0]) { %>
+<p class='instanceDetail-detailContainer'>
+  <span class="instance-detailLabel">Condition:</span>
+  <%= instance.condition %>
+</p>
+<% } %>
+<form method='POST' action=''>
+  <input type='hidden' name='instance_and_product_ids' value='<%= instance._id %>_<%= product._id %>' required>
+  <button class='deleteButton'>Delete</button>
+</form>
+
+<br>
+<p><a href='<%= instance.getUrl() %>'>Go back</a></p>

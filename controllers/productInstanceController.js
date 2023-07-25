@@ -136,10 +136,31 @@ exports.productinstance_create_post = [
 ];
 
 exports.productinstance_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product Instance delete GET');
+  const id = new ObjectId(req.params.id);
+  const instanceDoc = await db
+    .collection('product_instances')
+    .findOne({ _id: id });
+  const instance = ProductInstance(instanceDoc);
+  const productDoc = await db
+    .collection('products')
+    .findOne({ _id: instance.product });
+  const product = Product(productDoc);
+  res.render('layout', {
+    contentFile: 'productinstance_delete',
+    stylesheets: ['productinstance_detail'],
+    title: 'Delete Instance?',
+    product,
+    instance,
+    statuses: STATUSES,
+  });
 });
 exports.productinstance_delete_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product Instance delete POST');
+  const ids = req.body.instance_and_product_ids.split('_');
+  const [instance_id, product_id] = ids;
+  const id = new ObjectId(instance_id);
+  const product = Product({ _id: product_id });
+  await db.collection('product_instances').deleteOne({ _id: id });
+  res.redirect(product.getUrl());
 });
 
 exports.productinstance_update_get = asyncHandler(async (req, res, next) => {

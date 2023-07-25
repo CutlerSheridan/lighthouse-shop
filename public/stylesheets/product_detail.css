@@ -28,3 +28,9 @@
 .product-instanceCard > p:not(.product-instanceCard > p:last-of-type) {
   margin-bottom: 0.7rem;
 }
+
+/* DELETE PAGE */
+
+.product-deleteInstructions {
+  font-weight: bold;
+}
