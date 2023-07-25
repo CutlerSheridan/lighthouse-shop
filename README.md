@@ -6,7 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- make form-added instances of status "New" not show the "new" and "% off" in the "All in-stock" list
 - implement category_delete
 
 #### TODO LATER
@@ -29,6 +28,10 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.4.2_
+
+- make form-added instances of status "New" not show the "new" and "% off" in the "All in-stock" list
 
 _0.4.1_
 

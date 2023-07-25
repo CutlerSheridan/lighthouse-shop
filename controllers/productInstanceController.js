@@ -99,7 +99,7 @@ exports.productinstance_create_post = [
     .toInt(),
   body('discount')
     .if((value, { req }) => req.body.status === STATUSES[0])
-    .customSanitizer((value) => ''),
+    .customSanitizer((value) => 0),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const instance = ProductInstance({
