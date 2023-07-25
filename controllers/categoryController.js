@@ -14,7 +14,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 
   res.render('layout', {
     contentFile: 'category_list',
-    title: 'All categories',
+    title: 'All Categories',
     categories,
   });
 });
@@ -52,7 +52,7 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
   res.render('layout', {
     contentFile: 'category_form',
     stylesheets: ['form'],
-    title: 'Add category',
+    title: 'Add Category',
   });
 });
 exports.category_create_post = [
@@ -65,7 +65,7 @@ exports.category_create_post = [
       res.render('layout', {
         contentFile: 'category_form',
         stylesheets: ['form'],
-        title: 'Add category',
+        title: 'Add Category',
         category,
         errors: errors.array(),
       });
@@ -100,8 +100,36 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_update_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category update GET');
+  const id = new ObjectId(req.params.id);
+  const categoryDoc = await db.collection('categories').findOne({ _id: id });
+  const category = Category(categoryDoc);
+  res.render('layout', {
+    contentFile: 'category_form',
+    stylesheets: ['form'],
+    title: 'Update Category',
+    category,
+  });
 });
-exports.category_update_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category update POST');
-});
+exports.category_update_post = [
+  body('name', 'Category name required').trim().notEmpty().escape(),
+  body('description', 'Description required').trim().notEmpty().escape(),
+  asyncHandler(async (req, res, next) => {
+    const id = new ObjectId(req.params.id);
+    const errors = validationResult(req);
+    const category = Category({ ...req.body, _id: id });
+    if (!errors.isEmpty()) {
+      res.render('layout', {
+        contentFile: 'category_form',
+        stylesheets: ['form'],
+        title: 'Update Category',
+        category,
+        errors: errors.array(),
+      });
+    } else {
+      await db
+        .collection('categories')
+        .updateOne({ _id: id }, { $set: category });
+      res.redirect(category.getUrl());
+    }
+  }),
+];

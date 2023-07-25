@@ -18,7 +18,7 @@ exports.product_list = asyncHandler(async (req, res, next) => {
   res.render('layout', {
     contentFile: 'product_list',
     stylesheets: ['product_list', 'product_grid'],
-    title: 'All products',
+    title: 'All Products',
     products,
     instances: instanceDocs,
     ObjectId,

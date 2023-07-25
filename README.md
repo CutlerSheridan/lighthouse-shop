@@ -6,9 +6,6 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement category_update
-- implement productinstance_update
-
 #### TODO LATER
 
 ##### Features
@@ -30,6 +27,17 @@ See all products, view by category, view product instances. CRUD products, categ
 - add credit
 
 #### DONE
+
+_0.5.2_
+
+- implement category_update_get
+- implement category_update_post
+
+_0.5.1_
+
+- implement productinstance_update_get
+- implement productinstance_update_post
+- add "go back" buttons to product and instance update forms
 
 _0.5.0_
 

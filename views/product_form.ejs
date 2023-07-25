@@ -23,6 +23,9 @@
   </div>
 
   <button type='submit'>Submit</button>
+  <% if (locals.product && product._id) { %>
+  <a href='<%= product.getUrl() %>' style='margin-left:10px'>Go back</a>
+  <% } %>
 </form>
 
 <% if(locals.errors) { %>

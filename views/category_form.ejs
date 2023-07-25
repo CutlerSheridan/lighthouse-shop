@@ -10,6 +10,9 @@
     <input class="form-control" id="category-description" name="description" value='<%= locals.category ? category.description : "" %>'>
   </div>
   <button>Submit</button>
+  <% if (locals.category && category._id) { %>
+  <a href='<%= category.getUrl() %>' style='margin-left:10px'>Go back</a>
+  <% } %>
 </form>
 
 <% if(locals.errors) { %>
