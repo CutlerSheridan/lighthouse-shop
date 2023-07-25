@@ -77,10 +77,26 @@ exports.category_create_post = [
 ];
 
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category delete GET');
+  const id = new ObjectId(req.params.id);
+  const [categoryDoc, productDoc] = await Promise.all([
+    db.collection('categories').findOne({ _id: id }),
+    db.collection('products').findOne({ categories: id }),
+  ]);
+  const category = Category(categoryDoc);
+  const hasProducts = productDoc ? true : false;
+
+  res.render('layout', {
+    contentFile: 'category_delete',
+    stylesheets: ['category_detail'],
+    title: 'Delete Category?',
+    category,
+    hasProducts,
+  });
 });
 exports.category_delete_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Category delete POST');
+  const id = new ObjectId(req.body.category_id);
+  await db.collection('categories').deleteOne({ _id: id });
+  res.redirect('/inventory/categories/');
 });
 
 exports.category_update_get = asyncHandler(async (req, res, next) => {

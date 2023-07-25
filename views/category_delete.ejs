@@ -1,0 +1,15 @@
+<h1>Delete <%= category.name %>?</h1>
+<p><%= category.description %></p>
+<% if (hasProducts) { %>
+<br>
+<p class='category-deleteInstructions'>Remove this category from all products to delete.</p>
+<% } else { %>
+<br>
+<form method='POST' action=''>
+  <input type='hidden' name='category_id' value='<%= category._id %>' required>
+  <button class='deleteButton'>Delete</button>
+</form>
+<% } %>
+
+<br>
+<p><a href='<%= category.getUrl() %>'>Go back</a></p>

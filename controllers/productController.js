@@ -170,8 +170,84 @@ exports.product_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.product_update_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product update GET');
+  const id = new ObjectId(req.params.id);
+  const [productDoc, categoryDocs] = await Promise.all([
+    db.collection('products').findOne({ _id: id }),
+    db.collection('categories').find({}).sort({ name: 1 }).toArray(),
+  ]);
+  const [product, categories] = [Product(productDoc), Category(categoryDocs)];
+  categories.forEach((cat) => {
+    if (product.categories.some((x) => x.equals(cat._id))) {
+      cat.checked = 'checked';
+    }
+  });
+  res.render('layout', {
+    contentFile: 'product_form',
+    stylesheets: ['form'],
+    title: 'Update Product',
+    product,
+    categories,
+  });
 });
-exports.product_update_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product update POST');
-});
+exports.product_update_post = [
+  (req, res, next) => {
+    if (!Array.isArray(req.body.categories)) {
+      if (!req.body.categories) {
+        req.body.categories = [];
+      } else {
+        req.body.categories = [req.body.categories];
+      }
+    }
+    next();
+  },
+  body('name', 'Product name is required').trim().notEmpty().escape(),
+  body('price')
+    .trim()
+    .notEmpty()
+    .escape()
+    .withMessage('Price is required')
+    .bail()
+    .isFloat()
+    .withMessage('Price must be number')
+    .bail()
+    .customSanitizer((value) => (+value).toFixed(2))
+    .isFloat({ min: 0.01 })
+    .withMessage('Price must be at least .01¢')
+    .toFloat()
+    .if(body('price').not().isFloat({ min: 0.01 }))
+    .customSanitizer((value) => ''),
+  body('description', 'Description is required').trim().notEmpty().escape(),
+  body('categories.*').trim().escape(),
+  body('categories', 'At least one category is required')
+    .isArray({ min: 1 })
+    .customSanitizer((value) => value.map((x) => new ObjectId(x))),
+  asyncHandler(async (req, res, next) => {
+    const id = new ObjectId(req.params.id);
+    const errors = validationResult(req);
+    const product = Product({ ...req.body, _id: id });
+    if (!errors.isEmpty()) {
+      const categoryDocs = await db
+        .collection('categories')
+        .find({})
+        .sort({ name: 1 })
+        .toArray();
+      const categories = Category(categoryDocs);
+      categories.forEach((cat) => {
+        if (product.categories.some((x) => x.equals(cat._id))) {
+          cat.checked = 'checked';
+        }
+      });
+      res.render('layout', {
+        contentFile: 'product_form',
+        stylesheets: ['form'],
+        title: 'Update Product',
+        categories,
+        product,
+        errors: errors.array(),
+      });
+    } else {
+      await db.collection('products').updateOne({ _id: id }, { $set: product });
+      res.redirect(product.getUrl());
+    }
+  }),
+];

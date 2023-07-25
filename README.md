@@ -6,7 +6,8 @@ See all products, view by category, view product instances. CRUD products, categ
 
 #### TODO NEXT
 
-- implement category_delete
+- implement category_update
+- implement productinstance_update
 
 #### TODO LATER
 
@@ -25,9 +26,18 @@ See all products, view by category, view product instances. CRUD products, categ
 
 ##### Style
 
+- add dollar sign before price in forms
 - add credit
 
 #### DONE
+
+_0.5.0_
+
+- implement product_update
+
+_0.4.3_
+
+- implement category_delete
 
 _0.4.2_
 
