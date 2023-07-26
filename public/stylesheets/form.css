@@ -19,3 +19,6 @@
   width: 3ch;
   text-align: right;
 }
+.form-priceWrapper > input {
+  width: 8ch;
+}

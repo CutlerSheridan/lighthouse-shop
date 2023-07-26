@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <label for="product-price">Price:</label>
-    <input class='form-control' id='product-price' name='price' value='<%= locals.product && typeof product.price === 'number' ? product.price : "" %>'>
+    <div class='form-priceWrapper'>$ <input class='form-control' id='product-price' name='price' value='<%= locals.product && typeof product.price === 'number' ? product.price : "" %>'></div>
   </div>
   <div class="form-group">
     <label for="product-description">Description:</label>

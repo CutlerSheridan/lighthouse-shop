@@ -4,6 +4,10 @@
 
 See all products, view by category, view product instances. CRUD products, categories, instances. Using Node, Express, ejs, MongoDB.
 
+Doesn't look pretty, just did it to learn Express.
+
+See it deployed [here](https://lighthouse-shop-production.up.railway.app/inventory).
+
 #### TODO NEXT
 
 #### TODO LATER
@@ -14,19 +18,21 @@ See all products, view by category, view product instances. CRUD products, categ
 
 ##### Behavior
 
-- make instances list alphabetical
-- make "in-stock" vs. "in stock" consistent
+##### Style
+
+#### DONE
+
+_1.0.1_
+
+- add deployed link to README
 - add indices for:
   - product_instances.product - for Product.getStock(), product_detail, category_detail
   - product_instances.status - for router.get('/')
   - products.categories - for category_detail
-
-##### Style
-
+- make instances list alphabetical
 - add dollar sign before price in forms
+- make "in-stock" vs. "in stock" consistent
 - add credit
-
-#### DONE
 
 _1.0.0_
 

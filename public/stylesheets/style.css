@@ -30,6 +30,10 @@ nav {
 nav > *:not(hr) {
   width: max-content;
 }
+.navbar-credit {
+  font-size: 1.2rem;
+  font-family: monospace;
+}
 .content-wrapper {
   margin: 0 2rem;
   width: 100%;

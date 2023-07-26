@@ -17,10 +17,16 @@ exports.productinstance_list = asyncHandler(async (req, res, next) => {
       .sort({ name: 1 })
       .toArray(),
   ]);
-  const [instances, products] = [
+  const [instancesUnsorted, products] = [
     ProductInstance(instanceDocs),
     Product(productDocs),
   ];
+  const instances = [];
+  products.forEach((prod) => {
+    instances.push(
+      ...instancesUnsorted.filter((x) => x.product.equals(prod._id))
+    );
+  });
   res.render('layout', {
     contentFile: 'productinstance_list',
     title: 'All Product Instances',
