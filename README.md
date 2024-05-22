@@ -22,6 +22,15 @@ See it deployed [here](https://lighthouse-shop-production.up.railway.app/invento
 
 #### DONE
 
+_1.0.2_
+
+- fix attribution link URL
+- make font sans-serif
+- change link colors
+- change link blue hue
+- adjust spacing around Update/Delete buttons
+- adjust h1 margins
+
 _1.0.1_
 
 - add deployed link to README

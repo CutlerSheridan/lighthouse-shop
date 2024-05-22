@@ -15,11 +15,20 @@ body {
   width: 100%;
   display: flex;
   font-size: 2rem;
+  font-family: Helvetica, Arial, sans-serif;
 }
 h1 {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   font-size: 3rem;
 }
+a {
+  color: rgb(68, 68, 255);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
 nav {
   margin: 2rem 1rem;
   display: flex;
@@ -55,4 +64,8 @@ nav > *:not(hr) {
 }
 .deleteButton:hover {
   background: rgb(184, 16, 49);
+}
+
+.controlButton {
+  margin-top: 1rem;
 }

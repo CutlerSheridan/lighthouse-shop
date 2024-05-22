@@ -4,9 +4,16 @@
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
+.productCard-name {
+  /* font-size: 1.4em; */
+  /* font-family: cursive; */
+}
 .productGrid-card {
   padding: 1rem;
   border: 1px solid black;
+}
+.productGrid-card > p:not(:last-of-type) {
+  margin-top: 0.15rem;
 }
 .productCard-price {
   font-size: 0.85em;
@@ -16,6 +23,7 @@
   font-size: 0.75em;
 }
 .productCard-description {
-  margin-top: 0.5rem;
-  font-size: 0.85em;
+  margin-top: 0.75rem;
+  font-size: 0.8em;
+  /* font-family: cursive; */
 }

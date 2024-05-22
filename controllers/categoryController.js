@@ -14,6 +14,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 
   res.render('layout', {
     contentFile: 'category_list',
+    stylesheets: ['category_list'],
     title: 'All Categories',
     categories,
   });
