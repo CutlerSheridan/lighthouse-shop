@@ -1,9 +1,5 @@
-.home-heading {
-  margin-bottom: 2rem;
-}
 .home-collectionList {
-  margin: 1rem 0;
-  list-style: inside;
+  margin: 1rem 4rem;
 }
 .home-collectionName {
   font-weight: bold;

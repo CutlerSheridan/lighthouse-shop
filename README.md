@@ -22,6 +22,16 @@ See it deployed [here](https://lighthouse-shop-production.up.railway.app/invento
 
 #### DONE
 
+_1.0.3_
+
+- adjust font sizes, weights
+- improve navbar spacing
+- improve home page spacing
+- add hr to product grid cards
+- improve product card spacing
+- change link base and :hover colors
+- change font sizes on product instance list
+
 _1.0.2_
 
 - fix attribution link URL

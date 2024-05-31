@@ -1,4 +1,7 @@
 :root {
+  /* --clr-link: rgb(68, 68, 255); */
+  --clr-link: rgb(0, 123, 255);
+  --clr-link-dark: rgb(0, 86, 179);
   font-size: 62.5%;
 }
 *,
@@ -14,30 +17,35 @@ body {
   height: 100%;
   width: 100%;
   display: flex;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5;
 }
 h1 {
   margin: 1rem 0;
-  font-size: 3rem;
+  font-size: 4rem;
+  font-weight: 500;
 }
 a {
-  color: rgb(68, 68, 255);
+  color: var(--clr-link);
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
+  color: var(--clr-link-dark);
 }
 
 nav {
-  margin: 2rem 1rem;
+  margin: 2rem 3rem 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 1.8rem;
 }
 nav > *:not(hr) {
   width: max-content;
+}
+nav > hr {
+  margin: 1rem 0;
 }
 .navbar-credit {
   font-size: 1.2rem;
